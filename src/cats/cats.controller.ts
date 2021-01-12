@@ -1,11 +1,9 @@
 import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 import { CatDTO } from './cat.dto';
-import { Cat } from './cat.model';
 import { CatsService } from './cats.service';
-import { ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
-
-@ApiTags("Cats")
+@ApiTags('Cats')
 @Controller('cats')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
@@ -29,6 +27,6 @@ export class CatsController {
       status: HttpStatus.CREATED,
       message: 'Cat created succesfull.',
       data: newCat,
-    })
+    });
   }
 }
