@@ -16,9 +16,9 @@ describe('CatsController', () => {
           useValue: {
             getCats: jest.fn(() => [testCat]),
             addCat: jest.fn(() => testCat),
-          }
-        }
-      ]
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<CatsController>(CatsController);
@@ -29,10 +29,12 @@ describe('CatsController', () => {
   });
 
   it('should make a new cat', async () => {
-    expect(await controller.newCat({
-      name: 'peluza',
-      age: 5,
-      breed: 'angora',
-    })).toEqual(testCat);
+    expect(
+      await controller.newCat({
+        name: 'peluza',
+        age: 5,
+        breed: 'angora',
+      }),
+    ).toEqual(testCat);
   });
 });

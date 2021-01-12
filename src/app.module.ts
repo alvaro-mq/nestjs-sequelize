@@ -16,7 +16,7 @@ import { CatsModule } from './cats/cats.module';
       synchronize: true,
       autoLoadModels: true,
     }),
-    CatsModule
+    CatsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

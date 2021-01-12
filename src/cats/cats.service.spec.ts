@@ -1,9 +1,9 @@
 import { getModelToken } from '@nestjs/sequelize';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CatsService } from './cats.service';
-import { Cat } from './cat.model'
+import { Cat } from './cat.model';
 
-const testCat = { name: 'peluza', age: 5, breed: 'angora'};
+const testCat = { name: 'peluza', age: 5, breed: 'angora' };
 
 describe('CatsService', () => {
   let service: CatsService;
@@ -17,8 +17,8 @@ describe('CatsService', () => {
           useValue: {
             findAll: jest.fn(() => [testCat]),
             create: jest.fn(() => testCat),
-          }
-        }
+          },
+        },
       ],
     }).compile();
 
@@ -30,10 +30,12 @@ describe('CatsService', () => {
   });
 
   it('should add a cat', async () => {
-    expect(await service.addCat({
-      name: 'peluza',
-      age: 5,
-      breed: 'angora'
-    })).toEqual(testCat);
-  })
+    expect(
+      await service.addCat({
+        name: 'peluza',
+        age: 5,
+        breed: 'angora',
+      }),
+    ).toEqual(testCat);
+  });
 });

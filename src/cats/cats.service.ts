@@ -11,7 +11,7 @@ export class CatsService {
     return this.catsRepo.findAll();
   }
 
-  async addCat(cat: CatDTO) {      
+  async addCat(cat: CatDTO) {
     return this.catsRepo.create(cat);
   }
 }
