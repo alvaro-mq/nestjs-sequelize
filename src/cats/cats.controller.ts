@@ -1,19 +1,34 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 import { CatDTO } from './cat.dto';
 import { Cat } from './cat.model';
 import { CatsService } from './cats.service';
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 
+
+@ApiTags("Cats")
 @Controller('cats')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
+  @ApiResponse({ status: 200 })
   @Get()
-  async getCats(): Promise<Cat[]> {
-    return this.catsService.getCats();
+  async getCats(@Res() res) {
+    const cats = await this.catsService.getCats();
+    return res.status(HttpStatus.OK).json({
+      status: HttpStatus.OK,
+      message: 'List cats succesfull.',
+      data: cats,
+    });
   }
 
+  @ApiResponse({ status: 201 })
   @Post()
-  async newCat(@Body() cat: CatDTO): Promise<Cat> {
-    return this.catsService.addCat(cat);
+  async newCat(@Res() res, @Body() cat: CatDTO) {
+    const newCat = await this.catsService.addCat(cat);
+    return res.status(HttpStatus.CREATED).json({
+      status: HttpStatus.CREATED,
+      message: 'Cat created succesfull.',
+      data: newCat,
+    })
   }
 }
