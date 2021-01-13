@@ -3,11 +3,16 @@ import { CatDTO } from './cat.dto';
 import { CatsService } from './cats.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
+import { PinoLogger, InjectPinoLogger } from "nestjs-pino";
+import { AppController } from 'src/app.controller';
 
 @ApiTags('Cats')
 @Controller('cats')
 export class CatsController {
-  constructor(private readonly catsService: CatsService) {}
+  constructor(
+    private readonly catsService: CatsService,
+    @InjectPinoLogger(CatsController.name) private readonly logger: PinoLogger
+  ) {}
 
   @ApiResponse({ status: 200 })
   @Get()
@@ -23,6 +28,7 @@ export class CatsController {
   @ApiResponse({ status: 201 })
   @Post()
   async newCat(@Res() res, @Body() cat: CatDTO) {
+    this.logger.debug('newCat');
     const newCat = await this.catsService.addCat(cat);
     return res.status(HttpStatus.CREATED).json({
       status: HttpStatus.CREATED,
