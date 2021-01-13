@@ -2,6 +2,7 @@ import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 import { CatDTO } from './cat.dto';
 import { CatsService } from './cats.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
 
 @ApiTags('Cats')
 @Controller('cats')
@@ -10,7 +11,7 @@ export class CatsController {
 
   @ApiResponse({ status: 200 })
   @Get()
-  async getCats(@Res() res) {
+  async getCats(@Res() res: Response) {
     const cats = await this.catsService.getCats();
     return res.status(HttpStatus.OK).json({
       status: HttpStatus.OK,
