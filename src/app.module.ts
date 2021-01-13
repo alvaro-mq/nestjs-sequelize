@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
-import { LoggerModule } from "nestjs-pino";
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
@@ -22,12 +22,15 @@ import { LoggerModule } from "nestjs-pino";
         name: 'app',
         level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
         useLevelLabels: true,
-        prettyPrint: process.env.NODE_ENV !== 'production' ? {
-          colorize: true,
-          levelFirst: true,
-          translateTime: 'UTC:mm/dd/yyyy, h:MM:ss TT Z'
-        } : {}
-      }
+        prettyPrint:
+          process.env.NODE_ENV !== 'production'
+            ? {
+                colorize: true,
+                levelFirst: true,
+                translateTime: 'UTC:mm/dd/yyyy, h:MM:ss TT Z',
+              }
+            : {},
+      },
     }),
     CatsModule,
   ],

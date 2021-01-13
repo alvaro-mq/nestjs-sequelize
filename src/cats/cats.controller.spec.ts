@@ -6,11 +6,11 @@ import { Response } from 'express';
 
 const testCat = { id: 1, name: 'peluza', age: 5, breed: 'angora' };
 
-const mockResponseObject = () => { 
+const mockResponseObject = () => {
   return createMock<Response>({
     status: jest.fn().mockReturnThis(),
     json: jest.fn().mockReturnThis(),
-  })
+  });
 };
 
 describe('CatsController', () => {
@@ -38,7 +38,11 @@ describe('CatsController', () => {
     await controller.getCats(response);
     expect(response.json).toHaveBeenCalledTimes(1);
     expect(response.status).toHaveBeenCalledWith(200);
-    expect(response.json).toHaveBeenCalledWith({ status: 200, message: 'List cats succesfull.', data: [testCat] });
+    expect(response.json).toHaveBeenCalledWith({
+      status: 200,
+      message: 'List cats succesfull.',
+      data: [testCat],
+    });
   });
 
   it('should make a new cat', async () => {
@@ -48,7 +52,11 @@ describe('CatsController', () => {
       age: 5,
       breed: 'angora',
     }),
-    expect(response.status).toHaveBeenCalledWith(201);
-    expect(response.json).toHaveBeenCalledWith({ status: 201, message: 'Cat created succesfull.', data: testCat });
+      expect(response.status).toHaveBeenCalledWith(201);
+    expect(response.json).toHaveBeenCalledWith({
+      status: 201,
+      message: 'Cat created succesfull.',
+      data: testCat,
+    });
   });
 });

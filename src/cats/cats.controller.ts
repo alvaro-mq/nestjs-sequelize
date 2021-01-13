@@ -3,15 +3,14 @@ import { CatDTO } from './cat.dto';
 import { CatsService } from './cats.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { PinoLogger, InjectPinoLogger } from "nestjs-pino";
-import { AppController } from 'src/app.controller';
+import { PinoLogger, InjectPinoLogger } from 'nestjs-pino';
 
 @ApiTags('Cats')
 @Controller('cats')
 export class CatsController {
   constructor(
     private readonly catsService: CatsService,
-    @InjectPinoLogger(CatsController.name) private readonly logger: PinoLogger
+    @InjectPinoLogger(CatsController.name) private readonly logger: PinoLogger,
   ) {}
 
   @ApiResponse({ status: 200 })
