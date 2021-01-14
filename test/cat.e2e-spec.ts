@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, HttpStatus } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { CatDTO } from 'src/cats/cat.dto';
+import { CatDTO } from 'src/modules/cats/cat.dto';
 
 describe('E2E Tests for NOTE Endpoints', () => {
   let app: INestApplication;

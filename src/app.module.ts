@@ -2,21 +2,12 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AppService } from './app.service';
-import { CatsModule } from './cats/cats.module';
+import { CatsModule } from './modules/cats/cats.module';
 import { LoggerModule } from 'nestjs-pino';
+import { DatabaseModule } from './core/database/database.module';
 
 @Module({
   imports: [
-    SequelizeModule.forRoot({
-      dialect: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'cats_db',
-      synchronize: true,
-      autoLoadModels: true,
-    }),
     LoggerModule.forRoot({
       pinoHttp: {
         name: 'app',
@@ -33,6 +24,7 @@ import { LoggerModule } from 'nestjs-pino';
       },
     }),
     CatsModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
